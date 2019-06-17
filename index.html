@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<!-- PWA DEPENDACIES -->
+	<link rel="js" type="/sw.js" href="">
+	<script src="/src/js/app.js"></script>
+
+</head>
+<body>
+	<h1>Lokasi Awal</h1>
+	<select name="lokasiAwal" id="lokasiAwal">
+		<option value="1">Surabaya</option>
+		<option value="2">Jakarta</option>
+		<option value="3">Sidoarjo</option>
+		<option value="4">Papua</option>
+	</select>
+	<h1>Lokasi Akhir</h1>
+	<select name="lokasiTujuan" id="lokasiAkhir">
+		<option value="1">Surabaya</option>
+		<option value="2">Jakarta</option>
+		<option value="3">Sidoarjo</option>
+		<option value="4">Papua</option>
+	</select>
+	<h1>Berat dalam kg</h1>
+	<input type="number" id="berat">
+	<h1>Jenis Pengiriman</h1>
+	<select name="jenisKirim" id="jenisKirim">
+		<option value="2.5">Kilat</option>
+		<option value="1.5">Cepat</option>
+		<option value="1">Regular</option>
+	</select>
+	<br>
+	<button onclick="calc()">Submit</button>
+
+	<h1>Result</h1>
+	<div id="result"></div>
+
+	<script>
+		var w
+		function calc() {
+			var awal = document.getElementById("lokasiAwal").value;
+			var akhir = document.getElementById("lokasiAkhir").value;
+			var jenisKirim = document.getElementById("jenisKirim").value;
+			var berat = document.getElementById("berat").value;
+			if (typeof(Worker) !== "undefined") {
+				if(typeof(w) == "undefined") {
+			      w = new Worker("demo_workers.js");
+
+			    }
+		    	 w.postMessage({'lokasiAwal' : awal, 'lokasiAkhir' : akhir, 'jenisKirim' : jenisKirim, 'berat' : berat});
+			    
+				w.onmessage=function(event){
+						document.getElementById('result').innerHTML = "<p>"+event.data+"</p>"
+						localStorage.setItem("finalData",event.data);
+				}   
+			} else {
+			   document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+			}
+		}
+
+	</script>
+</body>
+
+
+</html>
