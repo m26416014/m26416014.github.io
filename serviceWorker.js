@@ -9,6 +9,7 @@ self.addEventListener('install', function(event) {
           '/bootstrap/js/bootstrap.min.js',
           '/bootstrap/css/bootstrap.min.css',
           '/js/jquery.min.js',
+          '/favicon.ico',
           '/img/logo.png',
           '/img/icon.png',
           '/img/icon-192.png',
