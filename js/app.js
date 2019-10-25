@@ -20,7 +20,7 @@ window.addEventListener('beforeinstallprompt', (event)=> {
   //event.preventDefault();
   
   deferredPrompt = event;
-  showInstallPromotion();
+  //showInstallPromotion();
   if (deferredPrompt) {
     deferredPrompt.prompt();
 
